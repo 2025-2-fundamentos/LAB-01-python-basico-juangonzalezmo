@@ -4,7 +4,7 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+from .utilidades import leer_datos
 
 def pregunta_04():
     """
@@ -26,3 +26,12 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    datos = leer_datos()
+    conteo_por_mes = {}
+
+    for fila in datos:
+        fecha = fila[2]
+        mes = fecha.split("-")[1]
+        conteo_por_mes[mes] = conteo_por_mes.get(mes, 0) + 1
+
+    return sorted(conteo_por_mes.items())

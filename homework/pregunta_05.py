@@ -4,7 +4,7 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+from .utilidades import leer_datos
 
 def pregunta_05():
     """
@@ -15,3 +15,24 @@ def pregunta_05():
     [('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
 
     """
+    datos = leer_datos()
+    estadisticas = {}
+
+    for fila in datos:
+        letra = fila[0]
+        valor = int(fila[1])
+
+        if letra not in estadisticas:
+            estadisticas[letra] = {"min": valor, "max": valor}
+        else:
+            if valor < estadisticas[letra]["min"]:
+                estadisticas[letra]["min"] = valor
+            if valor > estadisticas[letra]["max"]:
+                estadisticas[letra]["max"] = valor
+
+    resultado = []
+    for letra in sorted(estadisticas.keys()):
+        info = estadisticas[letra]
+        resultado.append((letra, info["max"], info["min"]))
+
+    return resultado

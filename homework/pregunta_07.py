@@ -4,7 +4,7 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+from .utilidades import leer_datos
 
 def pregunta_07():
     """
@@ -25,3 +25,19 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    datos = leer_datos()
+    mapeo = {}
+
+    for fila in datos:
+        letra = fila[0]
+        numero = int(fila[1])
+
+        if numero not in mapeo:
+            mapeo[numero] = []
+        mapeo[numero].append(letra)
+
+    resultado = []
+    for numero in sorted(mapeo.keys()):
+        resultado.append((numero, mapeo[numero]))
+
+    return resultado

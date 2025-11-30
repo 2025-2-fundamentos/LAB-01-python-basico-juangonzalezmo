@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+from .utilidades import leer_datos
 
 def pregunta_08():
     """
@@ -27,3 +28,20 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    datos = leer_datos()
+    mapeo = {}
+
+    for fila in datos:
+        letra = fila[0]
+        numero = int(fila[1])
+
+        if numero not in mapeo:
+            mapeo[numero] = set()
+        mapeo[numero].add(letra)
+
+    resultado = []
+    for numero in sorted(mapeo.keys()):
+        letras_ordenadas = sorted(mapeo[numero])
+        resultado.append((numero, letras_ordenadas))
+
+    return resultado

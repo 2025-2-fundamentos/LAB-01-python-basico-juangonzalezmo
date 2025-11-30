@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+from .utilidades import leer_datos
 
 def pregunta_11():
     """
@@ -16,3 +17,14 @@ def pregunta_11():
 
 
     """
+    datos = leer_datos()
+    suma_por_letra = {}
+
+    for fila in datos:
+        valor = int(fila[1])
+        letras = fila[3].split(",")
+
+        for letra in letras:
+            suma_por_letra[letra] = suma_por_letra.get(letra, 0) + valor
+
+    return dict(sorted(suma_por_letra.items()))
